@@ -1,0 +1,117 @@
+<div class="container">
+    <div>
+        <h1 class="">{{title}}
+            <span class="pull-right">
+                <button type="submit" class="btn btn-lg btn-primary" (click)="createTask()">Create Task</button>
+                <button type="submit" class="btn btn-lg btn-success" (click)="viewTasks()">View Tasks</button>
+            </span>
+        </h1>
+    </div>
+    <hr>
+    <!-- Address-->
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8" *ngIf='showForm'>
+                <h3>Address: {{address.street}}, {{address.city}}, {{address.state}}.</h3>
+            </div>
+        </div>
+        <!--Form Row -->
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <!--Form -->
+                <div *ngIf='showForm'>
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+                        <div class="form-group">
+                            <h2>Task: {{user.task}} </h2>
+                            <label for="">Serial No: </label>
+                            <input type="text" name="user.no" [(ngModel)]="user.no" class="form-control" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="">To Do Task: </label>
+                            <input type="text" name="user.task" [(ngModel)]="user.task" class="form-control" placeholder="Task">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email: </label>
+                            <input type="email" name="user.email" [(ngModel)]="user.email" class="form-control" placeholder="johndoe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description </label>
+                            <textarea rows="5" cols="" name="user.description" [(ngModel)]='user.description' class="form-control" placeholder="Task Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Add Task</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit Form -->
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <!--Form -->
+                <div *ngIf='editForm'>
+                    <form #f="ngForm">
+                        <div class="form-group">
+                            <h2>Task: {{user.task}} </h2>
+                            <label for="">Serial No: </label>
+                            <input type="text" name="user.no" [(ngModel)]="user.no" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">To Do Task: </label>
+                            <input type="text" name="user.task" [(ngModel)]="user.task" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email: </label>
+                            <input type="email" name="user.email" [(ngModel)]="user.email" class="form-control" placeholder="johndoe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description </label>
+                            <textarea rows="5" cols="" name="user.description" [(ngModel)]='user.description' class="form-control" placeholder="Task Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="button" class="btn btn-primary" (click)="editForm=false;showTable=true">Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Table-->
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8" *ngIf='showTable'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of Data">
+                            <td>{{item["user.no"]}}</td>
+                            <td>{{item["user.task"]}}</td>
+                            <td>{{item["user.description"]}}</td>
+                            <td>
+                                <button type="submit" class="btn btn-success" (click)="editTask(item)">Edit</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" (click)="Ok()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
